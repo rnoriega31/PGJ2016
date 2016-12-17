@@ -33,6 +33,67 @@ hsp = 0;
 vsp = 0;
 jumpspeed = 25;
 movespeed = 10;
+dir = 1;
+
+can_attack = false;
+alarm[1] = 1;
+
+attack_delay = 30;
+attack_duration = 5;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Attack Delay
+
+can_attack = true;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Destroy Attack Object
+
+if (instance_exists(obj_Attack)) {
+    with (obj_Attack) {
+        instance_destroy();
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -62,6 +123,11 @@ key_left = -keyboard_check(vk_left);
 key_jump = keyboard_check_pressed(vk_space);
 
 move = key_left + key_right;
+
+if (move != 0) {
+    dir = move;
+}
+
 hsp = move * movespeed;
 
 if (vsp &lt; max_grav) {
@@ -81,14 +147,73 @@ if (place_meeting(x + hsp, y, obj_Floor)) {
 }
 x += hsp;
 
+with (obj_Floor) {
+    if (obj_CholoSamurai.y + (obj_CholoSamurai.sprite_height / 2) &gt; y - (sprite_height / 2) + 1) {
+        image_alpha = 0.5;
+        is_solid = false;
+    } else {
+        image_alpha = 1;
+        is_solid = true;
+    }
+}
+
 // Vertical Collision
 if (place_meeting(x, y + vsp, obj_Floor)) {
     while (!place_meeting(x, y + sign(vsp), obj_Floor)) {
         y += sign(vsp);
     }
     vsp = 0;
+    if (obj_Floor.is_solid) {
+        show_debug_message("Colliding with solid object on " + string(obj_Floor.y));
+    }
 }
+
 y += vsp;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Handle Attack Button
+
+key_attack = keyboard_check_pressed(ord('Z'));
+
+
+if (key_attack) {
+    // Create according to direction
+    if (can_attack) {
+        if (dir == 1) attack = instance_create(x + sprite_width, y, obj_Attack);
+        if (dir == -1) attack = instance_create(x - sprite_width, y, obj_Attack);
+        
+        can_attack = false;
+        alarm[1] = attack_delay;    // time until can attack again
+    }
+    alarm[0] = attack_duration;   // obj_Attack destruction
+}
+
+if (instance_exists(obj_Attack)) {
+    // Attack following player
+    attack.y = y;
+    attack.x = x + sprite_width;
+    if (dir == 1) attack.x = x + sprite_width;
+    if (dir == -1) attack.x = x - sprite_width;
+}
 </string>
           </argument>
         </arguments>

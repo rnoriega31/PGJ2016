@@ -8,15 +8,19 @@
   <sprites name="sprites">
     <sprite>sprites\spr_CholoSamurai</sprite>
     <sprite>sprites\spr_Floor</sprite>
+    <sprite>sprites\spr_Attack</sprite>
+    <sprite>sprites\spr_LeftHand</sprite>
   </sprites>
-  <backgrounds name="background"/>
+  <backgrounds name="background">
+    <background>background\bg_temp</background>
+  </backgrounds>
   <paths name="paths"/>
-  <scripts name="scripts">
-    <script>scripts\scr_player_move.gml</script>
-  </scripts>
   <objects name="objects">
     <object>objects\obj_CholoSamurai</object>
     <object>objects\obj_Floor</object>
+    <object>objects\obj_Attack</object>
+    <object>objects\obj_HurtboxParent</object>
+    <object>objects\obj_Hand</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_game</room>
