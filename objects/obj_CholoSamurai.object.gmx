@@ -118,9 +118,9 @@ if (instance_exists(obj_Attack)) {
             <kind>1</kind>
             <string>///Get the player's input
 
-key_right = keyboard_check(vk_right);
-key_left = -keyboard_check(vk_left);
-key_jump = keyboard_check_pressed(vk_space);
+key_right   = keyboard_check(vk_right);
+key_left    = -keyboard_check(vk_left);
+key_jump    = keyboard_check_pressed(vk_space);
 
 move = key_left + key_right;
 
@@ -134,19 +134,13 @@ if (vsp &lt; max_grav) {
     vsp += grav;
 }
 
-if (place_meeting(x, y + 1, obj_Floor)) {
-    vsp = key_jump * -jumpspeed;
-}
-
-// Horizontal Collision
-if (place_meeting(x + hsp, y, obj_Floor)) {
-    while (!place_meeting(x + sign(hsp), y, obj_Floor)) {
-        x += sign(hsp);
+for (var i = 0; i &lt; instance_number(obj_Floor); i++) {
+    if (instance_place(x, y + 1, instance_find(obj_Floor, i)) != noone &amp;&amp; instance_find(obj_Floor, i).is_solid) {
+         vsp = key_jump * -jumpspeed;
     }
-    hsp = 0;
 }
-x += hsp;
 
+// This logic will toggle all is_solid properties
 with (obj_Floor) {
     if (obj_CholoSamurai.y + (obj_CholoSamurai.sprite_height / 2) &gt; y - (sprite_height / 2) + 1) {
         image_alpha = 0.5;
@@ -157,18 +151,35 @@ with (obj_Floor) {
     }
 }
 
-// Vertical Collision
-if (place_meeting(x, y + vsp, obj_Floor)) {
-    while (!place_meeting(x, y + sign(vsp), obj_Floor)) {
-        y += sign(vsp);
+// This logic will check wether the object is colliding with any obj_Floor instance
+// Each axis will be checked separately
+// For the Y axis, collisions from the bottom will have no effect (that's what the is_solid property is for)
+for (var i = 0; i &lt; instance_number(obj_Floor); i++) {
+
+    // The current floor instance
+    var current_floor_instance = instance_find(obj_Floor, i);
+    
+    // Y axis collision check (with is_solid check)
+    if (instance_place(x, y + vsp, current_floor_instance) != noone &amp;&amp; current_floor_instance.is_solid) {
+
+        while (instance_place(x, y + sign(vsp), current_floor_instance) == noone) {
+            y += sign(vsp);
+        }
+        vsp = 0;
     }
-    vsp = 0;
-    if (obj_Floor.is_solid) {
-        show_debug_message("Colliding with solid object on " + string(obj_Floor.y));
+    
+    // X axis collision check
+    if (instance_place(x + hsp, y, obj_Floor) != noone) {
+        while (instance_place(x + sign(hsp), y, obj_Floor) == noone) {
+            x += sign(hsp);
+        }
+        hsp = 0;
     }
 }
 
+// Apply velocity
 y += vsp;
+x += hsp;
 
 </string>
           </argument>
