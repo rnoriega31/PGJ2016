@@ -10,6 +10,9 @@
     <sprite>sprites\spr_Floor</sprite>
     <sprite>sprites\spr_Attack</sprite>
     <sprite>sprites\spr_LeftHand</sprite>
+    <sprite>sprites\spr_Wall</sprite>
+    <sprite>sprites\spr_LeftHandAttackFist</sprite>
+    <sprite>sprites\spr_HitboxLeftHandAttackFist</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_temp</background>
@@ -21,6 +24,12 @@
     <object>objects\obj_Attack</object>
     <object>objects\obj_HurtboxParent</object>
     <object>objects\obj_Hand</object>
+    <object>objects\obj_Wall</object>
+    <object>objects\obj_AttackManager</object>
+    <object>objects\obj_PunchAttack</object>
+    <object>objects\obj_LeftHand</object>
+    <object>objects\obj_HitboxParent</object>
+    <object>objects\obj_HitboxLeftHandAttackFist</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_game</room>
