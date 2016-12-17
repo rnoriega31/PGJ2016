@@ -13,6 +13,11 @@
     <sprite>sprites\spr_Wall</sprite>
     <sprite>sprites\spr_LeftHandAttackFist</sprite>
     <sprite>sprites\spr_HitboxLeftHandAttackFist</sprite>
+    <sprite>sprites\spr_Thunder</sprite>
+    <sprite>sprites\spr_RightHand</sprite>
+    <sprite>sprites\spr_ThunderIndicator</sprite>
+    <sprite>sprites\spr_RightHandAttackThunderIdle</sprite>
+    <sprite>sprites\spr_RightHandAttackThunderOpening</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_temp</background>
@@ -30,6 +35,10 @@
     <object>objects\obj_LeftHand</object>
     <object>objects\obj_HitboxParent</object>
     <object>objects\obj_HitboxLeftHandAttackFist</object>
+    <object>objects\obj_RightHand</object>
+    <object>objects\obj_Thunder</object>
+    <object>objects\obj_ThunderAttack</object>
+    <object>objects\obj_ThunderIndicator</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_game</room>

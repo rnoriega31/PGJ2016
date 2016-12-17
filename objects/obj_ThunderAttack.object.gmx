@@ -2,7 +2,7 @@
 <object>
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
-  <visible>0</visible>
+  <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
@@ -25,20 +25,18 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-start_delay = 20;
+            <string>right_hand = instance_find(obj_RightHand, 0);
 
-hand = instance_find(obj_LeftHand, 0);
+// When the indicator will stop following the player
+indicator_movement_window = 150;
 
-hand.sprite_index = spr_LeftHandAttackFist;
-hand.image_speed = 0;
+// When will the thunder fall
+thunder_spawn_delay = 180;
 
-shrinking = false;
-enlarging = false;
-
-alarm[0] = start_delay;
-
-hand.is_invincible = true;
+// Right Hand sprite initial configuration
+right_hand.is_invinsible    = true;
+right_hand.sprite_index     = spr_RightHandAttackThunderOpening;
+right_hand.image_speed      = 0.2;
 </string>
           </argument>
         </arguments>
@@ -61,15 +59,47 @@ hand.is_invincible = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>hand.is_invincible = false;
+            <string>///Destroy Logic
 
-hand.sprite_index = spr_LeftHand;
+right_hand.is_invinsible = false;
 
-if (instance_exists(obj_HitboxLeftHandAttackFist)) {
-    with (obj_HitboxLeftHandAttackFist) {
+if (instance_exists(obj_ThunderIndicator)) {
+    with (obj_ThunderIndicator) {
         instance_destroy();
     }
 }
+
+// TODO: regresar al sprite original
+right_hand.sprite_index = spr_RightHand;
+right_hand.image_speed  = 0;
+
+// TODO: Destruir trueno
+// TODO: Destruir Hitbox del trueno
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Spawns thunder
+
+instance_destroy();
 </string>
           </argument>
         </arguments>
@@ -92,9 +122,10 @@ if (instance_exists(obj_HitboxLeftHandAttackFist)) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Start Animation
+            <string>///Stops following the player
 
-hand.image_speed = 0.2;
+indicator = instance_find(obj_ThunderIndicator, 0);
+indicator.should_follow_player = false;
 </string>
           </argument>
         </arguments>
@@ -117,20 +148,31 @@ hand.image_speed = 0.2;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Stop attack after animation
+            <string>///Init indicator and thunder timers
 
-var last_sprite = hand.image_number - 1;
+// Get last sprite index
+var last_sprite = right_hand.image_number - 1;
 
-if (hand.image_index &gt;= last_sprite - 5 and hand.image_index &lt;= last_sprite - 1) {
-    if (!instance_exists(obj_HitboxLeftHandAttackFist)) {
-        instance_create(hand.x, hand.y, obj_HitboxLeftHandAttackFist);
+if (right_hand.sprite_index == spr_RightHandAttackThunderOpening) {
+
+    if(right_hand.image_index == last_sprite) {
+        
+        if(! instance_exists(obj_ThunderIndicator)) {
+        
+            var player = instance_find(obj_CholoSamurai, 0);
+            
+            // Creates Indicator
+            thunder_indicator = instance_create(player.x, (obj_Floor.y - obj_Floor.sprite_height / 2), obj_ThunderIndicator);
+            
+            // Callback to stop the indicator from following the player
+            alarm[0] = indicator_movement_window;
+            
+            // Callback to spawn the thunder
+            alarm[1] = thunder_spawn_delay;
+            
+            right_hand.sprite_index = spr_RightHandAttackThunderIdle;
+        }
     }
-}
-
-if (hand.image_index == last_sprite) {
-    hand.image_speed = 0;
-    
-    instance_destroy();
 }
 </string>
           </argument>

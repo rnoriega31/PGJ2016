@@ -79,7 +79,8 @@ ds_list_destroy(attack_list);
             <kind>1</kind>
             <string>/// Choose an attack randomly
 
-instance_create(0, 0, obj_PunchAttack);
+//instance_create(0, 0, obj_PunchAttack);
+instance_create(0, 0, obj_ThunderAttack);
 
 
 
