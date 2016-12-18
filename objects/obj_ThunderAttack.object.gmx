@@ -28,10 +28,10 @@
             <string>right_hand = instance_find(obj_RightHand, 0);
 
 // When the indicator will stop following the player
-indicator_movement_window = 150;
+indicator_movement_window = 60;
 
 // When will the thunder fall
-thunder_spawn_delay = 180;
+thunder_spawn_delay = 90;
 
 // Right Hand sprite initial configuration
 right_hand.is_invinsible    = true;
@@ -63,17 +63,31 @@ right_hand.image_speed      = 0.2;
 
 right_hand.is_invinsible = false;
 
+// Destroys thunder indicator
 if (instance_exists(obj_ThunderIndicator)) {
     with (obj_ThunderIndicator) {
         instance_destroy();
     }
 }
 
-// TODO: regresar al sprite original
+// Destroys thunder
+if (instance_exists(obj_Thunder)) {
+    with (obj_Thunder) {
+        instance_destroy();
+    }
+}
+
+if (instance_exists(obj_HitboxThunderAttack)) {
+    with (obj_HitboxThunderAttack) {
+        instance_destroy();
+    }
+}
+
+
+// Returns to right hand original sprite
 right_hand.sprite_index = spr_RightHand;
 right_hand.image_speed  = 0;
 
-// TODO: Destruir trueno
 // TODO: Destruir Hitbox del trueno
 </string>
           </argument>
@@ -97,9 +111,14 @@ right_hand.image_speed  = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Spawns thunder
+            <string>///Spawns Thunder and Hitbox
 
-instance_destroy();
+with (obj_ThunderIndicator) {
+    instance_create(x, 0, obj_Thunder);
+    instance_create(x, 0, obj_HitboxThunderAttack);
+}
+
+// Instanciar el hitbox
 </string>
           </argument>
         </arguments>
@@ -172,6 +191,13 @@ if (right_hand.sprite_index == spr_RightHandAttackThunderOpening) {
             
             right_hand.sprite_index = spr_RightHandAttackThunderIdle;
         }
+    }
+}
+
+if (instance_exists(obj_Thunder)) {
+    thunder = instance_find(obj_Thunder, 0);
+    if (thunder.image_index == thunder.image_number - 1) {
+        instance_destroy();
     }
 }
 </string>

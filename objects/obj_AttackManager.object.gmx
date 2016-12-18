@@ -82,7 +82,7 @@ ds_list_destroy(attack_list);
 //instance_create(0, 0, obj_PunchAttack);
 instance_create(0, 0, obj_ThunderAttack);
 
-
+alarm[0] = 120;
 
 //alarm[0] = 180;
 </string>
