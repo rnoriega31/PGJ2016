@@ -27,6 +27,9 @@
     <sprite>sprites\spr_ThunderIndicator</sprite>
     <sprite>sprites\spr_Wall</sprite>
     <sprite>sprites\spr_Face</sprite>
+    <sprite>sprites\spr_PlayerAttacking</sprite>
+    <sprite>sprites\spr_PlayerDamaged</sprite>
+    <sprite>sprites\spr_PlayerDead</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_temp</background>

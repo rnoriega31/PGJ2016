@@ -54,9 +54,12 @@ if (place_meeting(x, y, obj_CholoSamurai)) {
     player = instance_find(obj_CholoSamurai, 0);
     
     if (!player.is_invinsible) {
-        player.p_health -= damage;
-        player.is_invinsible = true;
-        player.alarm[2] = player.invincibility_frames;
+        player.p_health         -= damage;
+        player.is_invinsible    = true;
+        player.alarm[2]         = player.invincibility_frames;
+        
+        player.state                = state_player.damaged;
+        player.locked_in_hurt       = true;
     }
 }
 </string>
