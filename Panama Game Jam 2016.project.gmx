@@ -7,6 +7,9 @@
   <sounds name="sound">
     <sound>sound\snd_AttackSwing</sound>
     <sound>sound\snd_AttackHit</sound>
+    <sound>sound\snd_ThunderStrike</sound>
+    <sound>sound\snd_PunchStrike</sound>
+    <sound>sound\snd_BackgroundMusic</sound>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_Attack</sprite>

@@ -270,8 +270,12 @@ switch (state) {
     case state_thunder_attack.hitbox_active:
     
         with (obj_ThunderIndicator) {
-            instance_create(x, 0, obj_Thunder);
-            instance_create(x, 0, obj_HitboxThunderAttack);
+            if (! instance_exists(obj_Thunder)) {
+                instance_create(x, 0, obj_Thunder);
+            }
+            if (! instance_exists(obj_HitboxThunderAttack)) { 
+                instance_create(x, 0, obj_HitboxThunderAttack);
+            }
         }
         
         right_hand.state = state_right_hand.attack_thunder_release;

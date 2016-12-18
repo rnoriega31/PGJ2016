@@ -32,6 +32,9 @@ enum state_punch_attack {
     finished
 }
 
+// Delay before playing attack sound
+var state_play_sound_delay = 35;
+
 // Delay before hitbox is active
 var state_active_delay = 75;
 
@@ -42,6 +45,7 @@ var state_idle_delay = 95;
 var state_finished_delay = 115;
 
 state = state_punch_attack.idle;
+alredy_played_sound = false; // plz understand
 
 hand               = instance_find(obj_LeftHand, 0);
 hand.state         = state_left_hand.attacking_fist;
@@ -50,6 +54,7 @@ hand.is_attacking  = true;
 alarm[0] = state_active_delay;
 alarm[1] = state_idle_delay;
 alarm[2] = state_finished_delay;
+alarm[3] = state_play_sound_delay;
 </string>
           </argument>
         </arguments>
@@ -76,6 +81,29 @@ alarm[2] = state_finished_delay;
 
 hand.state         = state_left_hand.idle;
 hand.is_attacking  = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>audio_play_sound(snd_PunchStrike, 10, false);
 </string>
           </argument>
         </arguments>

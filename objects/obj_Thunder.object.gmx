@@ -35,6 +35,9 @@ enum state_thunder {
 state = state_thunder.idle;
 
 image_speed = 0.2;
+audio_play_sound(snd_ThunderStrike, 10, false);
+
+
 </string>
           </argument>
         </arguments>
