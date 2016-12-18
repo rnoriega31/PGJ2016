@@ -25,14 +25,21 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Registers posible attacks
+            <string>/// Init machine state and registers posible attacks
+
+enum state_boss_manager {
+    idle,
+    ready,    
+}
+
+state = state_boss_manager.ready;
+
+delay_state_ready = 180;
 
 attack_list = ds_list_create();
 
 ds_list_add(attack_list, obj_PunchAttack);
 ds_list_add(attack_list, obj_ThunderAttack);
-
-alarm[0] = 180;
 </string>
           </argument>
         </arguments>
@@ -55,7 +62,7 @@ alarm[0] = 180;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
+            <string>/// Destroys the attack list
 ds_list_destroy(attack_list);
 </string>
           </argument>
@@ -79,15 +86,59 @@ ds_list_destroy(attack_list);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Choose an attack randomly
+            <string>/// Change state to ready
+state = state_boss_manager.ready;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Manages state machine
 
-var index = random_range(0,2);
-
-var attack = ds_list_find_value(attack_list, index);
-instance_create(0, 0, attack);
-
-// Forgive me
-alarm[0] = 120;
+switch (state) {
+    case state_boss_manager.idle:
+        break;
+        
+    case state_boss_manager.ready:    
+    
+        /// Choose an attack randomly
+        var index = random_range(0,2); // Range inclusion is [n,m)
+        
+        var attack = ds_list_find_value(attack_list, index);
+        
+        // TODO: maybe check if an attack can be instantiated multiple times instead??
+        if(! instance_exists(attack)) {
+            instance_create(0, 0, attack);
+            
+            state = state_boss_manager.idle;
+        }
+        
+        // Callback for next attack
+        alarm[0] = delay_state_ready;        
+        
+        break;
+        
+    default:
+        show_debug_message("error: state boss manager");
+        break;
+}
 </string>
           </argument>
         </arguments>
