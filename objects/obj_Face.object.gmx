@@ -32,7 +32,7 @@ e_health = 1000;
 e_max_health = 1000;
 
 is_invincible = false;
-invincibility_delay = 60;
+invincibility_delay = 30;
 </string>
           </argument>
         </arguments>
