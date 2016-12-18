@@ -127,9 +127,10 @@ if (hand.image_index &gt;= last_sprite - 8 and hand.image_index &lt;= last_sprit
     }
 }
 
-if (hand.image_index == last_sprite) {
+show_debug_message("AAAAUGH&lt;: " + string(hand.image_index) + "/" + string(last_sprite));
+if (hand.image_index &gt;= last_sprite) {
     hand.image_speed = 0;
-    
+    hand.image_index = 0;
     instance_destroy();
 }
 </string>
