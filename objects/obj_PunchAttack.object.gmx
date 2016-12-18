@@ -45,7 +45,7 @@ state = state_punch_attack.idle;
 
 hand               = instance_find(obj_LeftHand, 0);
 hand.state         = state_left_hand.attacking_fist;
-hand.is_invincible = true;
+hand.is_attacking  = true;
 
 alarm[0] = state_active_delay;
 alarm[1] = state_idle_delay;
@@ -75,7 +75,7 @@ alarm[2] = state_finished_delay;
             <string>// Returns hand to original state and destroy hitbox
 
 hand.state         = state_left_hand.idle;
-hand.is_invincible = false;
+hand.is_attacking  = false;
 </string>
           </argument>
         </arguments>

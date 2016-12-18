@@ -29,6 +29,9 @@
 e_max_health = 1;
 is_invincible = false;
 invincibility_delay = 1;
+
+// Forgibe pls
+is_attacking = false;
 </string>
           </argument>
         </arguments>
@@ -78,8 +81,8 @@ is_invincible = false;
             <kind>1</kind>
             <string>// Collision with attack object
 if (place_meeting(x, y, obj_Attack)) {
-    if (!is_invincible) {
-        e_health -= 20;
+    if (! is_invincible &amp;&amp; ! is_attacking) {
+        e_health -= 20; // TODO: forgibe me mpls
         is_invincible = true;
         alarm[0] = invincibility_delay;
     }
