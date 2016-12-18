@@ -25,7 +25,17 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>right_hand = instance_find(obj_RightHand, 0);
+            <string>/// Initialize state
+
+enum state_thunder_attack {
+    idle,
+    homing,
+    creating_thunder,
+    active,
+    finished
+}
+
+right_hand = instance_find(obj_RightHand, 0);
 
 // When the indicator will stop following the player
 indicator_movement_window = 60;
@@ -33,10 +43,13 @@ indicator_movement_window = 60;
 // When will the thunder fall
 thunder_spawn_delay = 90;
 
-// Right Hand sprite initial configuration
+// Right Hand
 right_hand.is_invinsible    = true;
-right_hand.sprite_index     = spr_RightHandAttackThunderOpening;
-right_hand.image_speed      = 0.2;
+right_hand.state            = state_right_hand.thunder_attack_opening;
+
+
+alarm[0] = indicator_movement_window;
+alarm[1] = thunder_spawn_delay;
 </string>
           </argument>
         </arguments>
@@ -111,14 +124,8 @@ right_hand.image_speed  = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Spawns Thunder and Hitbox
-
-with (obj_ThunderIndicator) {
-    instance_create(x, 0, obj_Thunder);
-    instance_create(x, 0, obj_HitboxThunderAttack);
-}
-
-// Instanciar el hitbox
+            <string>/// Change state to active
+state = state_thunder_attack.active;
 </string>
           </argument>
         </arguments>
@@ -141,8 +148,10 @@ with (obj_ThunderIndicator) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Stops following the player
+            <string>///Change state to homing
+state = state_thunder_attack.homing;
 
+// TODO: move to step
 indicator = instance_find(obj_ThunderIndicator, 0);
 indicator.should_follow_player = false;
 </string>
@@ -168,6 +177,59 @@ indicator.should_follow_player = false;
           <argument>
             <kind>1</kind>
             <string>///Init indicator and thunder timers
+
+// en idle, el estado de right hand pasa a opening
+// en homing el estado de right hand pasa a blrbrl
+
+// en homing, instanciar el indicador
+
+// en active, isntanciar el hitbox
+
+// en active, instanciar el rayo
+
+// en finished, el estado de right hand pasa a idle
+
+
+switch (state) {
+    case state_thunder_attack.homing:
+    
+        if(! instance_exists(obj_ThunderIndicator)) {
+            // Creates Indicator
+            thunder_indicator = instance_create(obj_CholoSamurai.x, (obj_Floor.y - obj_Floor.sprite_height / 2), obj_ThunderIndicator);
+            thunder_indicator.state = state_thunder_indicator.homing;
+            
+            right_hand.state = state_right_hand.thunder_attack_charging;
+        }
+        
+        break;
+        
+    case state_thunder_attack.creating_thunder: // TODO: rename 
+    
+        
+        
+        break;
+        
+    case state_thunder_attack.active:
+    
+        with (obj_ThunderIndicator) {
+            instance_create(x, 0, obj_Thunder);
+            instance_create(x, 0, obj_HitboxThunderAttack);
+        }
+    
+
+    
+        break;
+        
+    case state_thunder_attack.finished:
+        instance_destroy();
+        
+        //TODO: move to destroy
+        thunder = instance_find(obj_Thunder, 0);
+        thunder.state = state_thunder.finished;
+    
+
+}
+
 
 // Get last sprite index
 var last_sprite = right_hand.image_number - 1;

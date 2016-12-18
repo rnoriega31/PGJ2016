@@ -16,7 +16,7 @@
     <sprite>sprites\spr_Thunder</sprite>
     <sprite>sprites\spr_RightHand</sprite>
     <sprite>sprites\spr_ThunderIndicator</sprite>
-    <sprite>sprites\spr_RightHandAttackThunderIdle</sprite>
+    <sprite>sprites\spr_RightHandAttackThunderCharging</sprite>
     <sprite>sprites\spr_RightHandAttackThunderOpening</sprite>
     <sprite>sprites\spr_HitboxThunderAttack</sprite>
   </sprites>

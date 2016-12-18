@@ -7,7 +7,91 @@
   <persistent>0</persistent>
   <parentName>obj_Hand</parentName>
   <maskName>&lt;undefined&gt;</maskName>
-  <events/>
+  <events>
+    <event eventtype="0" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Initialize properties
+event_inherited();
+
+enum state_right_hand {
+    idle,
+    attack_thunder_opening,
+    attack_thunder_charging,
+    attack_thunder_release
+}
+
+state = state_right_hand.idle;
+
+e_health = 100;
+e_max_health = 100;
+
+image_speed      = 0.2;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Manage state machine
+
+switch (state) {
+    case state_right_hand.idle:
+        sprite_index = spr_RightHand;
+        break;
+        
+    case state_right_hand.attack_thunder_opening:
+        sprite_index = spr_RightHandAttackThunderOpening;
+        break;
+        
+    case state_right_hand.attack_thunder_charging:
+        sprite_index = spr_RightHandAttackThunderCharging;
+        break;
+        
+    case state_right_hand.attack_thunder_release:
+        // TODO: create sprite for release
+        sprite_index = spr_RightHandAttackThunderCharging; // TODO: remove this lel
+        break;
+        
+    default:
+        show_debug_message("pls merge");
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+  </events>
   <PhysicsObject>0</PhysicsObject>
   <PhysicsObjectSensor>0</PhysicsObjectSensor>
   <PhysicsObjectShape>0</PhysicsObjectShape>

@@ -181,7 +181,7 @@ if(state == state_punch_attack.active) {
 if (state == state_punch_attack.idle) {
     if (instance_exists(obj_HitboxLeftHandAttackFist)) {
         with (obj_HitboxLeftHandAttackFist) {
-            instance_destroy();
+            instance_destroy(); // TODO: it should kill itself
         }
     }
 }

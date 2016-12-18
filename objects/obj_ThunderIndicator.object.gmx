@@ -25,8 +25,16 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>depth = -100;
-should_follow_player = true;
+            <string>/// Initialize properties
+
+enum state_thunder_indicator {
+    idle,
+    homing
+}
+
+state = state_thunder_indicator.idle;
+
+depth = -100;
 </string>
           </argument>
         </arguments>
@@ -49,12 +57,36 @@ should_follow_player = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (should_follow_player) {
-    x = instance_find(obj_CholoSamurai, 0).x;
-    
-    m_floor = instance_find(obj_Floor, 0);
-    y = m_floor.y - (m_floor.sprite_height / 2) + (sprite_height / 2);
+            <string>/// Manage state machine
+
+switch (state) {
+    case state_thunder_indicator.homing:
+        x = obj_CholoSamurai.x;
+        break;
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Perform general step property update
+
+y = obj_Floor.y - (obj_Floor.sprite_height / 2) + (sprite_height / 2);
 </string>
           </argument>
         </arguments>
