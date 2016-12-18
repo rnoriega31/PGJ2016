@@ -32,7 +32,8 @@ enum state_right_hand {
     idle,
     attack_thunder_opening,
     attack_thunder_charging,
-    attack_thunder_release
+    attack_thunder_release,
+    stunned
 }
 
 state = state_right_hand.idle;
@@ -84,6 +85,10 @@ switch (state) {
     case state_right_hand.attack_thunder_release:
         // TODO: create sprite for release
         sprite_index = spr_RightHandAttackThunderCharging; // TODO: remove this lel
+        break;
+        
+    case state_right_hand.stunned:
+        sprite_index = spr_RightHandStunned;
         break;
         
     default:

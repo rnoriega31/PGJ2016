@@ -38,7 +38,8 @@ state = state_boss_manager.ready;
 delay_state_ready = 180;
 
 // Left  Hand delays
-delay_left_hand_state_idle = 360;
+delay_left_hand_state_idle  = 360;
+delay_right_hand_state_idle = 360;
 
 attack_list = ds_list_create();
 
@@ -73,6 +74,38 @@ ds_list_destroy(attack_list);
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Changes right hand state back to idle
+with(obj_RightHand) {
+    state = state_right_hand.idle;
+    e_health = e_max_health;   
+}
+
+// TODO: move to state??
+with(obj_PlatformRightHand) {
+    instance_destroy();
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="1">
       <action>
         <libid>1</libid>
@@ -100,8 +133,6 @@ with(obj_LeftHand) {
 with(obj_PlatformLeftHand) {
     instance_destroy();
 }
-
-show_debug_message("callback for reviving hand");
 </string>
           </argument>
         </arguments>
@@ -176,7 +207,11 @@ switch (state) {
             }
             
             if (attack == obj_ThunderAttack) {
-                create = true;
+                with(obj_RightHand) {
+                    if (state != state_right_hand.stunned) {
+                        create = true;
+                    }
+                }
             }            
         
             if (create) {
@@ -234,8 +269,50 @@ with(obj_LeftHand) {
             );
             
             // Set a callback to return to idle
-            show_debug_message("time: " + string(callback_delay));
             other.alarm[1] = callback_delay;
+        }
+    }   
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Manages right hand state
+
+var callback_delay = delay_right_hand_state_idle; // TODO: this LOL
+
+with(obj_RightHand) {
+    if (e_health == 0) {
+    
+        if(! instance_exists(obj_PlatformRightHand)) {
+            // Change state to stunned
+            state = state_right_hand.stunned;
+            
+            // Spawn a platform
+            instance_create(
+                x,
+                y - 20,
+                obj_PlatformRightHand
+            );
+            
+            // Set a callback to return to idle
+            other.alarm[2] = callback_delay; // TODO: this
         }
     }   
 }

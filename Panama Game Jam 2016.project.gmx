@@ -14,6 +14,7 @@
     <sprite>sprites\spr_LeftHandAttackFist</sprite>
     <sprite>sprites\spr_LeftHandIdle</sprite>
     <sprite>sprites\spr_LeftHandStunned</sprite>
+    <sprite>sprites\spr_RightHandStunned</sprite>
     <sprite>sprites\spr_Platform</sprite>
     <sprite>sprites\spr_PlayerIdle</sprite>
     <sprite>sprites\spr_HitboxThunderAttackFloor</sprite>
