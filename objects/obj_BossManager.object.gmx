@@ -34,7 +34,11 @@ enum state_boss_manager {
 
 state = state_boss_manager.ready;
 
+// Boss Manager delay
 delay_state_ready = 180;
+
+// Left  Hand delays
+delay_left_hand_state_idle = 360;
 
 attack_list = ds_list_create();
 
@@ -64,6 +68,40 @@ ds_list_add(attack_list, obj_ThunderAttack);
             <kind>1</kind>
             <string>/// Destroys the attack list
 ds_list_destroy(attack_list);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Changes left hand state back to idle
+with(obj_LeftHand) {
+    state = state_left_hand.idle;
+    e_health = e_max_health;   
+}
+
+// TODO: move to state??
+with(obj_Platform) {
+    instance_destroy();
+}
+
+show_debug_message("callback for reviving hand");
 </string>
           </argument>
         </arguments>
@@ -125,9 +163,27 @@ switch (state) {
         
         // TODO: maybe check if an attack can be instantiated multiple times instead??
         if(! instance_exists(attack)) {
-            instance_create(0, 0, attack);
+        
+            var create = false;
+        
+            // Forgive me Liskov
+            if (attack == obj_PunchAttack) {
+                with(obj_LeftHand) {
+                    if (state != state_left_hand.stunned) {
+                        create = true;
+                    }
+                }
+            }
             
-            state = state_boss_manager.idle;
+            if (attack == obj_ThunderAttack) {
+                create = true;
+            }            
+        
+            if (create) {
+                instance_create(0, 0, attack);
+            
+                state = state_boss_manager.idle;
+            }    
         }
         
         // Callback for next attack
@@ -138,6 +194,50 @@ switch (state) {
     default:
         show_debug_message("error: state boss manager");
         break;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Manages left hand state
+
+var callback_delay = delay_left_hand_state_idle;
+
+with(obj_LeftHand) {
+    if (e_health == 0) {
+    
+        if(! instance_exists(obj_Platform)) {
+            // Change state to stunned
+            state = state_left_hand.stunned;
+            
+            // Spawn a platform
+            instance_create(
+                x,
+                y - (sprite_height / 2),
+                obj_Platform // TODO: rename to platform right so it doesnt conflict with the right hand's one???
+            );
+            
+            // Set a callback to return to idle
+            show_debug_message("time: " + string(callback_delay));
+            other.alarm[1] = callback_delay;
+        }
+    }   
 }
 </string>
           </argument>

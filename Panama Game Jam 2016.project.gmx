@@ -6,23 +6,25 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
+    <sprite>sprites\spr_Attack</sprite>
     <sprite>sprites\spr_CholoSamurai</sprite>
     <sprite>sprites\spr_Floor</sprite>
-    <sprite>sprites\spr_Attack</sprite>
-    <sprite>sprites\spr_LeftHand</sprite>
-    <sprite>sprites\spr_Wall</sprite>
-    <sprite>sprites\spr_LeftHandAttackFist</sprite>
     <sprite>sprites\spr_HitboxLeftHandAttackFist</sprite>
-    <sprite>sprites\spr_Thunder</sprite>
-    <sprite>sprites\spr_RightHand</sprite>
-    <sprite>sprites\spr_ThunderIndicator</sprite>
-    <sprite>sprites\spr_RightHandAttackThunderCharging</sprite>
-    <sprite>sprites\spr_RightHandAttackThunderOpening</sprite>
     <sprite>sprites\spr_HitboxThunderAttack</sprite>
-    <sprite>sprites\spr_PlayerMoving</sprite>
+    <sprite>sprites\spr_LeftHandAttackFist</sprite>
+    <sprite>sprites\spr_LeftHandIdle</sprite>
+    <sprite>sprites\spr_LeftHandStunned</sprite>
+    <sprite>sprites\spr_Platform</sprite>
     <sprite>sprites\spr_PlayerIdle</sprite>
     <sprite>sprites\spr_HitboxThunderAttackFloor</sprite>
     <sprite>sprites\spr_ThunderAttackFloor</sprite>
+    <sprite>sprites\spr_PlayerMoving</sprite>
+    <sprite>sprites\spr_RightHandAttackThunderCharging</sprite>
+    <sprite>sprites\spr_RightHandAttackThunderOpening</sprite>
+    <sprite>sprites\spr_RightHandIdle</sprite>
+    <sprite>sprites\spr_Thunder</sprite>
+    <sprite>sprites\spr_ThunderIndicator</sprite>
+    <sprite>sprites\spr_Wall</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_temp</background>
@@ -32,17 +34,17 @@
     <script>scripts\foo.gml</script>
   </scripts>
   <objects name="objects">
+    <object>objects\obj_Attack</object>
+    <object>objects\obj_BossManager</object>
     <object>objects\obj_CholoSamurai</object>
     <object>objects\obj_Floor</object>
-    <object>objects\obj_Attack</object>
-    <object>objects\obj_HurtboxParent</object>
     <object>objects\obj_Hand</object>
-    <object>objects\obj_Wall</object>
-    <object>objects\obj_BossManager</object>
-    <object>objects\obj_PunchAttack</object>
-    <object>objects\obj_LeftHand</object>
-    <object>objects\obj_HitboxParent</object>
     <object>objects\obj_HitboxLeftHandAttackFist</object>
+    <object>objects\obj_HitboxParent</object>
+    <object>objects\obj_HitboxThunderAttack</object>
+    <object>objects\obj_HurtboxParent</object>
+    <object>objects\obj_LeftHand</object>
+    <object>objects\obj_PunchAttack</object>
     <object>objects\obj_RightHand</object>
     <object>objects\obj_Thunder</object>
     <object>objects\obj_ThunderAttack</object>
@@ -50,6 +52,8 @@
     <object>objects\obj_HitboxThunderAttack</object>
     <object>objects\obj_ThunderFloor</object>
     <object>objects\obj_HitboxThunderAttackFloor</object>
+    <object>objects\obj_Wall</object>
+    <object>objects\obj_Platform</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_game</room>
