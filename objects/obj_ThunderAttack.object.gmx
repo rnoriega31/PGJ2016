@@ -32,16 +32,18 @@ enum state_thunder_attack {
     homing_start,
     homing_stop,
     hitbox_active,
+    hitbox_spreading,
     finished
 }
 
 state = state_thunder_attack.idle;
 
 // TODO: set frames
-var delay_state_homing_start    = 20;
-var delay_state_homing_stop     = 80;
-var delay_state_hitbox_active   = 110;
-var delay_state_finished        = 130;
+var delay_state_homing_start        = 20;
+var delay_state_homing_stop         = 80;
+var delay_state_hitbox_active       = 110;
+var delay_state_hitbox_floor_spread = 120;
+var delay_state_finished            = 130;
 
 // Set right hand to thunder_attack_opening
 right_hand                  = instance_find(obj_RightHand, 0);
@@ -52,7 +54,8 @@ right_hand.state            = state_right_hand.attack_thunder_opening;
 alarm[0] = delay_state_homing_start;
 alarm[1] = delay_state_homing_stop;
 alarm[2] = delay_state_hitbox_active;
-alarm[3] = delay_state_finished;
+alarm[3] = delay_state_hitbox_floor_spread;
+alarm[4] = delay_state_finished;
 </string>
           </argument>
         </arguments>
@@ -92,12 +95,42 @@ with (obj_ThunderIndicator) {
 with (obj_Thunder) {
     state = state_thunder.finished;
 }
+with (obj_ThunderFloor) {
+    state = state_thunder_floor.finished;
+}
 
 // Destroys hitboxes
 with (obj_HitboxThunderAttack) {
     state = state_hitbox_thunder_attack.finished;
 }
+with (obj_HitboxThunderAttackFloor) {
+    state = state_hitbox_thunder_attack_floor.finished;
+}
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Changes state to finished
+state = state_thunder_attack.finished;
 </string>
           </argument>
         </arguments>
@@ -121,7 +154,7 @@ with (obj_HitboxThunderAttack) {
           <argument>
             <kind>1</kind>
             <string>///Changes state to finished
-state = state_thunder_attack.finished;
+state = state_thunder_attack.hitbox_spreading;
 </string>
           </argument>
         </arguments>
@@ -228,7 +261,7 @@ state = state_thunder_attack.homing_start;
         if(! instance_exists(obj_ThunderIndicator)) {
         
             // Creates Indicator
-            thunder_indicator = instance_create(
+            var thunder_indicator = instance_create(
                 obj_CholoSamurai.x, 
                 (obj_Floor.y - obj_Floor.sprite_height / 2), 
                 obj_ThunderIndicator
@@ -258,6 +291,12 @@ state = state_thunder_attack.homing_start;
         
         right_hand.state = state_right_hand.attack_thunder_release;
     
+        break;
+        
+    case state_thunder_attack.hitbox_spreading:
+        
+        instance_create(room_width / 2, (obj_Floor.y - obj_Floor.sprite_height / 2), obj_ThunderFloor);
+        instance_create(room_width / 2, (obj_Floor.y - obj_Floor.sprite_height / 2), obj_HitboxThunderAttackFloor);
         break;
         
     case state_thunder_attack.finished:

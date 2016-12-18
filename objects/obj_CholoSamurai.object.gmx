@@ -254,28 +254,39 @@ x += hsp;
             <kind>1</kind>
             <string>///Handle Attack Button
 
-key_attack = keyboard_check_pressed(ord('Z'));
-
+key_attack  = keyboard_check_pressed(ord('Z'));
+attack      = noone;
 
 if (key_attack) {
     // Create according to direction
     if (can_attack) {
-        if (dir == 1) attack = instance_create(x + sprite_width, y, obj_Attack);
-        if (dir == -1) attack = instance_create(x - sprite_width, y, obj_Attack);
+    
+        if (dir == 1)   attack = instance_create(x + sprite_width / 2, y, obj_Attack);
+        else            attack = instance_create(x + sprite_width / 2, y, obj_Attack);
         
         can_attack = false;
-        alarm[1] = attack_delay;    // time until can attack again
+        alarm[1]   = attack_delay;    // time until can attack again
     }
     alarm[0] = attack_duration;   // obj_Attack destruction
 }
 
+
 if (instance_exists(obj_Attack)) {
+
+    attack = instance_find(obj_Attack, 0);
+
     // Attack following player
     attack.y = y;
-    attack.x = x + sprite_width;
-    if (dir == 1) attack.x = x + sprite_width;
-    if (dir == -1) attack.x = x - sprite_width;
+    
+    if (dir == 1) {
+        attack.x = x + sprite_width / 2;
+    } else { 
+        attack.x = x + sprite_width / 2;
+    }
+    
+    show_debug_message("dir: " + string(dir) + ", attack: " + string(attack.x) + ", player: " + string(x) + ", dif: " + string(attack.x - x));
 }
+
 </string>
           </argument>
         </arguments>

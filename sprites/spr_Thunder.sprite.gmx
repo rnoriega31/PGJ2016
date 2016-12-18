@@ -10,7 +10,7 @@
   <bbox_left>1</bbox_left>
   <bbox_right>77</bbox_right>
   <bbox_top>0</bbox_top>
-  <bbox_bottom>671</bbox_bottom>
+  <bbox_bottom>699</bbox_bottom>
   <HTile>0</HTile>
   <VTile>0</VTile>
   <TextureGroups>
@@ -18,7 +18,7 @@
   </TextureGroups>
   <For3D>0</For3D>
   <width>80</width>
-  <height>672</height>
+  <height>700</height>
   <frames>
     <frame index="0">images\spr_Thunder_0.png</frame>
     <frame index="1">images\spr_Thunder_1.png</frame>
