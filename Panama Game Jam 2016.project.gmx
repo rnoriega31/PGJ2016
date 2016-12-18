@@ -38,7 +38,6 @@
     <background>background\bg_temp</background>
   </backgrounds>
   <paths name="paths"/>
-  <scripts name="scripts"/>
   <objects name="objects">
     <object>objects\obj_Attack</object>
     <object>objects\obj_BossManager</object>

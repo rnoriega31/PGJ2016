@@ -82,7 +82,7 @@ is_invincible = false;
             <string>// Collision with attack object
 if (place_meeting(x, y, obj_Attack)) {
     if (! is_invincible &amp;&amp; ! is_attacking) {
-        e_health -= 20; // TODO: forgibe me mpls
+        e_health -= obj_Attack.damage; // TODO: forgibe me mpls
         is_invincible = true;
         alarm[0] = invincibility_delay;
         

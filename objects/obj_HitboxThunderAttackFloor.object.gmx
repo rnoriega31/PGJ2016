@@ -25,14 +25,16 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event_inherited();
+            <string>/// Init
+event_inherited();
 
 enum state_hitbox_thunder_attack_floor {
     idle,
     finished,
 }
 
-damage = 50;
+damage_offset = 9;
+damage        = round(20 + random_range(0, damage_offset)) ;
 
 state = state_hitbox_thunder_attack.idle;
 </string>
