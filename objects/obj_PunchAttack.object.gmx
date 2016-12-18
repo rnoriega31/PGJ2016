@@ -25,34 +25,31 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// Initialize punch attack
-enum state {
+            <string>/// Initialize punch attack
+enum state_punch_attack {
     idle,
     active,
     finished
 }
 
-m_state = state.idle;
-
 // Delay before hitbox is active
-state_active_delay = 75;
+var state_active_delay = 75;
 
 // Delay before going idle after an attack
-state_idle_delay = 95;
+var state_idle_delay = 95;
 
 // Delay before finishing
-state_finished_delay = 115;
+var state_finished_delay = 115;
 
-hand = instance_find(obj_LeftHand, 0);
+state = state_punch_attack.idle;
 
-hand.sprite_index = spr_LeftHandAttackFist;
-hand.image_speed = 0.2; // TODO: move to left hand
+hand               = instance_find(obj_LeftHand, 0);
+hand.state         = state_left_hand.attacking_fist;
+hand.is_invincible = true;
 
 alarm[0] = state_active_delay;
 alarm[1] = state_idle_delay;
 alarm[2] = state_finished_delay;
-
-hand.is_invincible = true;
 </string>
           </argument>
         </arguments>
@@ -77,10 +74,8 @@ hand.is_invincible = true;
             <kind>1</kind>
             <string>// Returns hand to original state and destroy hitbox
 
+hand.state         = state_left_hand.idle;
 hand.is_invincible = false;
-
-hand.sprite_index = spr_LeftHand;
-// TODO: reset image index
 </string>
           </argument>
         </arguments>
@@ -104,7 +99,7 @@ hand.sprite_index = spr_LeftHand;
           <argument>
             <kind>1</kind>
             <string>///Changes state to finished
-m_state = state.finished;
+state = state_punch_attack.finished;
 </string>
           </argument>
         </arguments>
@@ -128,7 +123,7 @@ m_state = state.finished;
           <argument>
             <kind>1</kind>
             <string>///Changes state to idle after an attack
-m_state = state.idle;
+state = state_punch_attack.idle;
 </string>
           </argument>
         </arguments>
@@ -152,9 +147,7 @@ m_state = state.idle;
           <argument>
             <kind>1</kind>
             <string>///Changes state to active
-m_state = state.active;
-
-//hand.image_speed = 0.2;
+state = state_punch_attack.active;
 </string>
           </argument>
         </arguments>
@@ -177,25 +170,15 @@ m_state = state.active;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Creates hitbox and finishes attack
+            <string>/// Creates hitbox and finishes attack
 
-// TODO: Check for state = active
-
-//var last_sprite = hand.image_number - 1;
-
-//if (hand.image_index &gt;= last_sprite - 8 and hand.image_index &lt;= last_sprite - 4) {
-if(m_state == state.active) {
+if(state == state_punch_attack.active) {
     if (! instance_exists(obj_HitboxLeftHandAttackFist)) {
         instance_create(hand.x, hand.y, obj_HitboxLeftHandAttackFist);
     }
 }
 
-// TODO: Check for state = finished
-
-//if (hand.image_index &gt;= last_sprite) {
-if (m_state == state.idle) {
-    
-    // TODO: destroy hitbox if exist
+if (state == state_punch_attack.idle) {
     if (instance_exists(obj_HitboxLeftHandAttackFist)) {
         with (obj_HitboxLeftHandAttackFist) {
             instance_destroy();
@@ -203,10 +186,7 @@ if (m_state == state.idle) {
     }
 }
 
-if (m_state == state.finished) {
-    hand.image_speed = 0; // TODO: delete this shit
-    hand.image_index = 0; // TODO: reset on destroy
-    
+if (state == state_punch_attack.finished) {    
     instance_destroy();
 }
 
