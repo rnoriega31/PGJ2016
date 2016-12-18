@@ -36,7 +36,7 @@
     <object>objects\obj_HurtboxParent</object>
     <object>objects\obj_Hand</object>
     <object>objects\obj_Wall</object>
-    <object>objects\obj_AttackManager</object>
+    <object>objects\obj_BossManager</object>
     <object>objects\obj_PunchAttack</object>
     <object>objects\obj_LeftHand</object>
     <object>objects\obj_HitboxParent</object>
