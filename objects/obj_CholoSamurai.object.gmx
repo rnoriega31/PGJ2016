@@ -46,7 +46,7 @@ attack_duration = 5;
 p_health = 100;
 p_max_health = 100;
 is_invinsible = false;
-invincibility_frames = 40;
+invincibility_frames = 70;
 </string>
           </argument>
         </arguments>

@@ -121,7 +121,7 @@ hand.image_speed = 0.2;
 
 var last_sprite = hand.image_number - 1;
 
-if (hand.image_index &gt;= last_sprite - 5 and hand.image_index &lt;= last_sprite - 1) {
+if (hand.image_index &gt;= last_sprite - 8 and hand.image_index &lt;= last_sprite - 4) {
     if (!instance_exists(obj_HitboxLeftHandAttackFist)) {
         instance_create(hand.x, hand.y, obj_HitboxLeftHandAttackFist);
     }

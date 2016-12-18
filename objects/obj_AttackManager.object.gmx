@@ -25,10 +25,12 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
+            <string>/// Registers posible attacks
+
 attack_list = ds_list_create();
 
 ds_list_add(attack_list, obj_PunchAttack);
+ds_list_add(attack_list, obj_ThunderAttack);
 
 alarm[0] = 180;
 </string>
@@ -79,12 +81,13 @@ ds_list_destroy(attack_list);
             <kind>1</kind>
             <string>/// Choose an attack randomly
 
-//instance_create(0, 0, obj_PunchAttack);
-instance_create(0, 0, obj_ThunderAttack);
+var index = random_range(0,2);
 
+var attack = ds_list_find_value(attack_list, index);
+instance_create(0, 0, attack);
+
+// Forgive me
 alarm[0] = 120;
-
-//alarm[0] = 180;
 </string>
           </argument>
         </arguments>

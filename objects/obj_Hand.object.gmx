@@ -31,8 +31,6 @@ e_health = 100;
 e_max_health = 100;
 is_invincible = false;
 invincibility_delay = 60;
-
-image_alpha = 0.5;
 </string>
           </argument>
         </arguments>
