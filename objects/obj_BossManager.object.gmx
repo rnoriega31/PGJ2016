@@ -229,7 +229,7 @@ with(obj_LeftHand) {
             // Spawn a platform
             instance_create(
                 x,
-                y - (sprite_height / 2),
+                y - 20,
                 obj_Platform // TODO: rename to platform right so it doesnt conflict with the right hand's one???
             );
             
