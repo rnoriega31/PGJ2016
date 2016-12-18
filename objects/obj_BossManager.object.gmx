@@ -35,7 +35,7 @@ enum state_boss_manager {
 state = state_boss_manager.ready;
 
 // Boss Manager delay
-delay_state_ready = 180;
+delay_state_ready = 280;
 
 // Left  Hand delays
 delay_left_hand_state_idle  = 360;

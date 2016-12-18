@@ -71,7 +71,6 @@ switch (state) {
 
     case state_right_hand.idle:
         sprite_index = spr_RightHandIdle;
-        image_index  = 0;
         break;
         
     case state_right_hand.attack_thunder_opening:
