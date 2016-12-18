@@ -19,6 +19,8 @@
     <sprite>sprites\spr_RightHandAttackThunderCharging</sprite>
     <sprite>sprites\spr_RightHandAttackThunderOpening</sprite>
     <sprite>sprites\spr_HitboxThunderAttack</sprite>
+    <sprite>sprites\spr_PlayerMoving</sprite>
+    <sprite>sprites\spr_PlayerIdle</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_temp</background>
