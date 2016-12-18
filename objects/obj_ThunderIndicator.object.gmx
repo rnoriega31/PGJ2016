@@ -29,7 +29,8 @@
 
 enum state_thunder_indicator {
     idle,
-    homing
+    homing,
+    finished
 }
 
 state = state_thunder_indicator.idle;
@@ -60,8 +61,20 @@ depth = -100;
             <string>/// Manage state machine
 
 switch (state) {
+
+    case state_thunder_indicator.idle:
+        break;
+
     case state_thunder_indicator.homing:
         x = obj_CholoSamurai.x;
+        break;
+        
+    case state_thunder_indicator.finished:
+        instance_destroy();
+        break;
+        
+    default:
+        show_debug_message("error: thunder indicator state");
         break;
 }
 </string>

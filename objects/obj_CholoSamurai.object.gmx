@@ -47,6 +47,8 @@ p_health = 100;
 p_max_health = 100;
 is_invinsible = false;
 invincibility_frames = 70;
+
+image_speed = 0.2;
 </string>
           </argument>
         </arguments>

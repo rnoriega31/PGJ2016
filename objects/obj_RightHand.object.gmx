@@ -66,8 +66,10 @@ image_speed      = 0.2;
             <string>/// Manage state machine
 
 switch (state) {
+
     case state_right_hand.idle:
         sprite_index = spr_RightHand;
+        image_index  = 0;
         break;
         
     case state_right_hand.attack_thunder_opening:
@@ -84,7 +86,7 @@ switch (state) {
         break;
         
     default:
-        show_debug_message("pls merge");
+        show_debug_message("error: right hand state");
 }
 </string>
           </argument>

@@ -29,27 +29,30 @@
 
 enum state_thunder_attack {
     idle,
-    homing,
-    creating_thunder,
-    active,
+    homing_start,
+    homing_stop,
+    hitbox_active,
     finished
 }
 
-right_hand = instance_find(obj_RightHand, 0);
+state = state_thunder_attack.idle;
 
-// When the indicator will stop following the player
-indicator_movement_window = 60;
+// TODO: set frames
+var delay_state_homing_start    = 20;
+var delay_state_homing_stop     = 80;
+var delay_state_hitbox_active   = 110;
+var delay_state_finished        = 130;
 
-// When will the thunder fall
-thunder_spawn_delay = 90;
-
-// Right Hand
-right_hand.is_invinsible    = true;
-right_hand.state            = state_right_hand.thunder_attack_opening;
+// Set right hand to thunder_attack_opening
+right_hand                  = instance_find(obj_RightHand, 0);
+right_hand.is_invinsible    = true; // TODO: maybe move to hand's step??
+right_hand.state            = state_right_hand.attack_thunder_opening;
 
 
-alarm[0] = indicator_movement_window;
-alarm[1] = thunder_spawn_delay;
+alarm[0] = delay_state_homing_start;
+alarm[1] = delay_state_homing_stop;
+alarm[2] = delay_state_hitbox_active;
+alarm[3] = delay_state_finished;
 </string>
           </argument>
         </arguments>
@@ -72,36 +75,78 @@ alarm[1] = thunder_spawn_delay;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Destroy Logic
+            <string>///Returns everything to pre-attack state
 
+// Removes right hand invinsibility
 right_hand.is_invinsible = false;
 
-// Destroys thunder indicator
-if (instance_exists(obj_ThunderIndicator)) {
-    with (obj_ThunderIndicator) {
-        instance_destroy();
-    }
-}
-
-// Destroys thunder
-if (instance_exists(obj_Thunder)) {
-    with (obj_Thunder) {
-        instance_destroy();
-    }
-}
-
-if (instance_exists(obj_HitboxThunderAttack)) {
-    with (obj_HitboxThunderAttack) {
-        instance_destroy();
-    }
-}
-
-
 // Returns to right hand original sprite
-right_hand.sprite_index = spr_RightHand;
-right_hand.image_speed  = 0;
+right_hand.state = state_right_hand.idle;
 
-// TODO: Destruir Hitbox del trueno
+// Destroys thunder indicator
+with (obj_ThunderIndicator) {
+    state = state_thunder_indicator.finished;
+}
+
+// Destroys thunders
+with (obj_Thunder) {
+    state = state_thunder.finished;
+}
+
+// Destroys hitboxes
+with (obj_HitboxThunderAttack) {
+    state = state_hitbox_thunder_attack.finished;
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Changes state to finished
+state = state_thunder_attack.finished;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Changes state to hitbox_active
+
+state = state_thunder_attack.hitbox_active;
 </string>
           </argument>
         </arguments>
@@ -124,8 +169,8 @@ right_hand.image_speed  = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Change state to active
-state = state_thunder_attack.active;
+            <string>/// Change state to homing_stop
+state = state_thunder_attack.homing_stop;
 </string>
           </argument>
         </arguments>
@@ -148,12 +193,9 @@ state = state_thunder_attack.active;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Change state to homing
-state = state_thunder_attack.homing;
+            <string>///Change state to homing_start
 
-// TODO: move to step
-indicator = instance_find(obj_ThunderIndicator, 0);
-indicator.should_follow_player = false;
+state = state_thunder_attack.homing_start;
 </string>
           </argument>
         </arguments>
@@ -176,91 +218,55 @@ indicator.should_follow_player = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Init indicator and thunder timers
+            <string>switch (state) {
 
-// en idle, el estado de right hand pasa a opening
-// en homing el estado de right hand pasa a blrbrl
+    case state_thunder_attack.idle:
+        break;
 
-// en homing, instanciar el indicador
-
-// en active, isntanciar el hitbox
-
-// en active, instanciar el rayo
-
-// en finished, el estado de right hand pasa a idle
-
-
-switch (state) {
-    case state_thunder_attack.homing:
+    case state_thunder_attack.homing_start:
     
         if(! instance_exists(obj_ThunderIndicator)) {
+        
             // Creates Indicator
-            thunder_indicator = instance_create(obj_CholoSamurai.x, (obj_Floor.y - obj_Floor.sprite_height / 2), obj_ThunderIndicator);
-            thunder_indicator.state = state_thunder_indicator.homing;
+            thunder_indicator = instance_create(
+                obj_CholoSamurai.x, 
+                (obj_Floor.y - obj_Floor.sprite_height / 2), 
+                obj_ThunderIndicator
+            );
             
-            right_hand.state = state_right_hand.thunder_attack_charging;
+            // Updates States
+            thunder_indicator.state = state_thunder_indicator.homing;
+            right_hand.state        = state_right_hand.attack_thunder_charging;
         }
         
         break;
         
-    case state_thunder_attack.creating_thunder: // TODO: rename 
+    case state_thunder_attack.homing_stop: 
     
-        
+        with (obj_ThunderIndicator) {
+            state = state_thunder_indicator.idle;
+        }
         
         break;
         
-    case state_thunder_attack.active:
+    case state_thunder_attack.hitbox_active:
     
         with (obj_ThunderIndicator) {
             instance_create(x, 0, obj_Thunder);
             instance_create(x, 0, obj_HitboxThunderAttack);
         }
-    
-
+        
+        right_hand.state = state_right_hand.attack_thunder_release;
     
         break;
         
     case state_thunder_attack.finished:
         instance_destroy();
+        break;
         
-        //TODO: move to destroy
-        thunder = instance_find(obj_Thunder, 0);
-        thunder.state = state_thunder.finished;
-    
-
-}
-
-
-// Get last sprite index
-var last_sprite = right_hand.image_number - 1;
-
-if (right_hand.sprite_index == spr_RightHandAttackThunderOpening) {
-
-    if(right_hand.image_index == last_sprite) {
-        
-        if(! instance_exists(obj_ThunderIndicator)) {
-        
-            var player = instance_find(obj_CholoSamurai, 0);
-            
-            // Creates Indicator
-            thunder_indicator = instance_create(player.x, (obj_Floor.y - obj_Floor.sprite_height / 2), obj_ThunderIndicator);
-            
-            // Callback to stop the indicator from following the player
-            alarm[0] = indicator_movement_window;
-            
-            // Callback to spawn the thunder
-            alarm[1] = thunder_spawn_delay;
-            
-            right_hand.sprite_index = spr_RightHandAttackThunderIdle;
-        }
-    }
-}
-
-if (instance_exists(obj_Thunder)) {
-    thunder = instance_find(obj_Thunder, 0);
-    if (thunder.image_index == thunder.image_number - 1) {
-        instance_destroy();
-    }
+    default:
+        show_debug_message("error: thunder attack state");
+        break;
 }
 </string>
           </argument>

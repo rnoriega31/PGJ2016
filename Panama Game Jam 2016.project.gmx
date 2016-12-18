@@ -24,6 +24,9 @@
     <background>background\bg_temp</background>
   </backgrounds>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\foo.gml</script>
+  </scripts>
   <objects name="objects">
     <object>objects\obj_CholoSamurai</object>
     <object>objects\obj_Floor</object>

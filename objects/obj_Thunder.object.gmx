@@ -63,6 +63,10 @@ switch (state) {
     case state_thunder.finished:
         instance_destroy();
         break;
+        
+    default:
+        show_debug_message("error: thunder state");
+        break;
 }
 </string>
           </argument>
