@@ -41,7 +41,6 @@
     <object>objects\obj_Hand</object>
     <object>objects\obj_HitboxLeftHandAttackFist</object>
     <object>objects\obj_HitboxParent</object>
-    <object>objects\obj_HitboxThunderAttack</object>
     <object>objects\obj_HurtboxParent</object>
     <object>objects\obj_LeftHand</object>
     <object>objects\obj_PunchAttack</object>
