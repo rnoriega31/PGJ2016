@@ -82,8 +82,7 @@ switch (state) {
         break;
         
     case state_right_hand.attack_thunder_release:
-        // TODO: create sprite for release
-        sprite_index = spr_RightHandAttackThunderCharging; // TODO: remove this lel
+        sprite_index = spr_RightHandAttackThunderRelease;
         break;
         
     case state_right_hand.stunned:

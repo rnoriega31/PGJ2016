@@ -33,6 +33,9 @@
     <sprite>sprites\spr_PlayerAttacking</sprite>
     <sprite>sprites\spr_PlayerDamaged</sprite>
     <sprite>sprites\spr_PlayerDead</sprite>
+    <sprite>sprites\spr_RightHandAttackThunderRelease</sprite>
+    <sprite>sprites\sprite22</sprite>
+    <sprite>sprites\spr_TuliVieja</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_temp</background>
@@ -60,6 +63,7 @@
     <object>objects\obj_PlatformLeftHand</object>
     <object>objects\obj_PlatformRightHand</object>
     <object>objects\obj_Face</object>
+    <object>objects\obj_TuliVieja</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_game</room>
