@@ -354,6 +354,8 @@ if (! locked_in_hurt &amp;&amp; ! (state == state_player.dead)) {
             
             state = state_player.attacking;
             locked_in_attack = true;
+            
+            audio_play_sound(snd_AttackSwing, 10, false);
         }
         alarm[0] = attack_duration;   // obj_Attack destruction
     }

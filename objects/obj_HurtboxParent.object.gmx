@@ -85,6 +85,9 @@ if (place_meeting(x, y, obj_Attack)) {
         e_health -= 20; // TODO: forgibe me mpls
         is_invincible = true;
         alarm[0] = invincibility_delay;
+        
+        // I HAV A. CANCER
+        audio_play_sound(snd_AttackHit, 10, false);
     }
 }
 
