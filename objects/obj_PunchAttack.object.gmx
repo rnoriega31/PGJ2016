@@ -25,18 +25,32 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-start_delay = 20;
+            <string>// Initialize punch attack
+enum state {
+    idle,
+    active,
+    finished
+}
+
+m_state = state.idle;
+
+// Delay before hitbox is active
+state_active_delay = 75;
+
+// Delay before going idle after an attack
+state_idle_delay = 95;
+
+// Delay before finishing
+state_finished_delay = 115;
 
 hand = instance_find(obj_LeftHand, 0);
 
 hand.sprite_index = spr_LeftHandAttackFist;
-hand.image_speed = 0;
+hand.image_speed = 0.2; // TODO: move to left hand
 
-shrinking = false;
-enlarging = false;
-
-alarm[0] = start_delay;
+alarm[0] = state_active_delay;
+alarm[1] = state_idle_delay;
+alarm[2] = state_finished_delay;
 
 hand.is_invincible = true;
 </string>
@@ -61,15 +75,60 @@ hand.is_invincible = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>hand.is_invincible = false;
+            <string>// Returns hand to original state and destroy hitbox
+
+hand.is_invincible = false;
 
 hand.sprite_index = spr_LeftHand;
-
-if (instance_exists(obj_HitboxLeftHandAttackFist)) {
-    with (obj_HitboxLeftHandAttackFist) {
-        instance_destroy();
-    }
-}
+// TODO: reset image index
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Changes state to finished
+m_state = state.finished;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Changes state to idle after an attack
+m_state = state.idle;
 </string>
           </argument>
         </arguments>
@@ -92,9 +151,10 @@ if (instance_exists(obj_HitboxLeftHandAttackFist)) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Start Animation
+            <string>///Changes state to active
+m_state = state.active;
 
-hand.image_speed = 0.2;
+//hand.image_speed = 0.2;
 </string>
           </argument>
         </arguments>
@@ -117,22 +177,40 @@ hand.image_speed = 0.2;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Stop attack after animation
+            <string>///Creates hitbox and finishes attack
 
-var last_sprite = hand.image_number - 1;
+// TODO: Check for state = active
 
-if (hand.image_index &gt;= last_sprite - 8 and hand.image_index &lt;= last_sprite - 4) {
-    if (!instance_exists(obj_HitboxLeftHandAttackFist)) {
+//var last_sprite = hand.image_number - 1;
+
+//if (hand.image_index &gt;= last_sprite - 8 and hand.image_index &lt;= last_sprite - 4) {
+if(m_state == state.active) {
+    if (! instance_exists(obj_HitboxLeftHandAttackFist)) {
         instance_create(hand.x, hand.y, obj_HitboxLeftHandAttackFist);
     }
 }
 
-show_debug_message("AAAAUGH&lt;: " + string(hand.image_index) + "/" + string(last_sprite));
-if (hand.image_index &gt;= last_sprite) {
-    hand.image_speed = 0;
-    hand.image_index = 0;
+// TODO: Check for state = finished
+
+//if (hand.image_index &gt;= last_sprite) {
+if (m_state == state.idle) {
+    
+    // TODO: destroy hitbox if exist
+    if (instance_exists(obj_HitboxLeftHandAttackFist)) {
+        with (obj_HitboxLeftHandAttackFist) {
+            instance_destroy();
+        }
+    }
+}
+
+if (m_state == state.finished) {
+    hand.image_speed = 0; // TODO: delete this shit
+    hand.image_index = 0; // TODO: reset on destroy
+    
     instance_destroy();
 }
+
+
 </string>
           </argument>
         </arguments>
