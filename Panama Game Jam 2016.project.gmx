@@ -52,7 +52,8 @@
     <object>objects\obj_ThunderFloor</object>
     <object>objects\obj_HitboxThunderAttackFloor</object>
     <object>objects\obj_Wall</object>
-    <object>objects\obj_Platform</object>
+    <object>objects\obj_PlatformLeftHand</object>
+    <object>objects\obj_PlatformRightHand</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_game</room>

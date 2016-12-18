@@ -97,7 +97,7 @@ with(obj_LeftHand) {
 }
 
 // TODO: move to state??
-with(obj_Platform) {
+with(obj_PlatformLeftHand) {
     instance_destroy();
 }
 
@@ -222,7 +222,7 @@ var callback_delay = delay_left_hand_state_idle;
 with(obj_LeftHand) {
     if (e_health == 0) {
     
-        if(! instance_exists(obj_Platform)) {
+        if(! instance_exists(obj_PlatformLeftHand)) {
             // Change state to stunned
             state = state_left_hand.stunned;
             
@@ -230,7 +230,7 @@ with(obj_LeftHand) {
             instance_create(
                 x,
                 y - 20,
-                obj_Platform // TODO: rename to platform right so it doesnt conflict with the right hand's one???
+                obj_PlatformLeftHand
             );
             
             // Set a callback to return to idle
