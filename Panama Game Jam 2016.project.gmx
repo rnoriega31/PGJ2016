@@ -26,6 +26,7 @@
     <sprite>sprites\spr_Thunder</sprite>
     <sprite>sprites\spr_ThunderIndicator</sprite>
     <sprite>sprites\spr_Wall</sprite>
+    <sprite>sprites\spr_Face</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_temp</background>
@@ -55,6 +56,7 @@
     <object>objects\obj_Wall</object>
     <object>objects\obj_PlatformLeftHand</object>
     <object>objects\obj_PlatformRightHand</object>
+    <object>objects\obj_Face</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_game</room>
