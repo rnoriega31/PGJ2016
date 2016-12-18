@@ -7,10 +7,10 @@
   <coltolerance>0</coltolerance>
   <sepmasks>0</sepmasks>
   <bboxmode>0</bboxmode>
-  <bbox_left>42</bbox_left>
-  <bbox_right>346</bbox_right>
-  <bbox_top>19</bbox_top>
-  <bbox_bottom>268</bbox_bottom>
+  <bbox_left>2</bbox_left>
+  <bbox_right>357</bbox_right>
+  <bbox_top>6</bbox_top>
+  <bbox_bottom>277</bbox_bottom>
   <HTile>0</HTile>
   <VTile>0</VTile>
   <TextureGroups>
@@ -21,5 +21,52 @@
   <height>288</height>
   <frames>
     <frame index="0">images\spr_RightHandIdle_0.png</frame>
+    <frame index="1">images\spr_RightHandIdle_1.png</frame>
+    <frame index="2">images\spr_RightHandIdle_2.png</frame>
+    <frame index="3">images\spr_RightHandIdle_3.png</frame>
+    <frame index="4">images\spr_RightHandIdle_4.png</frame>
+    <frame index="5">images\spr_RightHandIdle_5.png</frame>
+    <frame index="6">images\spr_RightHandIdle_6.png</frame>
+    <frame index="7">images\spr_RightHandIdle_7.png</frame>
+    <frame index="8">images\spr_RightHandIdle_8.png</frame>
+    <frame index="9">images\spr_RightHandIdle_9.png</frame>
+    <frame index="10">images\spr_RightHandIdle_10.png</frame>
+    <frame index="11">images\spr_RightHandIdle_11.png</frame>
+    <frame index="12">images\spr_RightHandIdle_12.png</frame>
+    <frame index="13">images\spr_RightHandIdle_13.png</frame>
+    <frame index="14">images\spr_RightHandIdle_14.png</frame>
+    <frame index="15">images\spr_RightHandIdle_15.png</frame>
+    <frame index="16">images\spr_RightHandIdle_16.png</frame>
+    <frame index="17">images\spr_RightHandIdle_17.png</frame>
+    <frame index="18">images\spr_RightHandIdle_18.png</frame>
+    <frame index="19">images\spr_RightHandIdle_19.png</frame>
+    <frame index="20">images\spr_RightHandIdle_20.png</frame>
+    <frame index="21">images\spr_RightHandIdle_21.png</frame>
+    <frame index="22">images\spr_RightHandIdle_22.png</frame>
+    <frame index="23">images\spr_RightHandIdle_23.png</frame>
+    <frame index="24">images\spr_RightHandIdle_24.png</frame>
+    <frame index="25">images\spr_RightHandIdle_25.png</frame>
+    <frame index="26">images\spr_RightHandIdle_26.png</frame>
+    <frame index="27">images\spr_RightHandIdle_27.png</frame>
+    <frame index="28">images\spr_RightHandIdle_28.png</frame>
+    <frame index="29">images\spr_RightHandIdle_29.png</frame>
+    <frame index="30">images\spr_RightHandIdle_30.png</frame>
+    <frame index="31">images\spr_RightHandIdle_31.png</frame>
+    <frame index="32">images\spr_RightHandIdle_32.png</frame>
+    <frame index="33">images\spr_RightHandIdle_33.png</frame>
+    <frame index="34">images\spr_RightHandIdle_34.png</frame>
+    <frame index="35">images\spr_RightHandIdle_35.png</frame>
+    <frame index="36">images\spr_RightHandIdle_36.png</frame>
+    <frame index="37">images\spr_RightHandIdle_37.png</frame>
+    <frame index="38">images\spr_RightHandIdle_38.png</frame>
+    <frame index="39">images\spr_RightHandIdle_39.png</frame>
+    <frame index="40">images\spr_RightHandIdle_40.png</frame>
+    <frame index="41">images\spr_RightHandIdle_41.png</frame>
+    <frame index="42">images\spr_RightHandIdle_42.png</frame>
+    <frame index="43">images\spr_RightHandIdle_43.png</frame>
+    <frame index="44">images\spr_RightHandIdle_44.png</frame>
+    <frame index="45">images\spr_RightHandIdle_45.png</frame>
+    <frame index="46">images\spr_RightHandIdle_46.png</frame>
+    <frame index="47">images\spr_RightHandIdle_47.png</frame>
   </frames>
 </sprite>

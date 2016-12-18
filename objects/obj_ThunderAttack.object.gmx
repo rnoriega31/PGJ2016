@@ -40,13 +40,13 @@ enum state_thunder_attack {
 state = state_thunder_attack.init;
 
 thunder_counter    = 0
-max_thunder_amount = 3
+max_thunder_amount = 1
 
-delay_state_homing_start        = 20;
-delay_state_homing_stop         = 80;
-delay_state_hitbox_active       = 110;
-delay_state_hitbox_floor_spread = 120;
-delay_state_finished            = 130;
+delay_state_homing_start        = 20 + 30;
+delay_state_homing_stop         = 80 + 30;
+delay_state_hitbox_active       = 110 + 30;
+delay_state_hitbox_floor_spread = 120 + 30;
+delay_state_finished            = 130 + 30;
 
 // Set right hand to thunder_attack_opening
 right_hand                  = instance_find(obj_RightHand, 0);
