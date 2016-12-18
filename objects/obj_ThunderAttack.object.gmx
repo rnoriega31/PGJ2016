@@ -47,7 +47,7 @@ var delay_state_finished            = 130;
 
 // Set right hand to thunder_attack_opening
 right_hand                  = instance_find(obj_RightHand, 0);
-right_hand.is_invinsible    = true; // TODO: maybe move to hand's step??
+right_hand.is_attacking     = true; // TODO: maybe move to hand's step??
 right_hand.state            = state_right_hand.attack_thunder_opening;
 
 
@@ -81,7 +81,7 @@ alarm[4] = delay_state_finished;
             <string>///Returns everything to pre-attack state
 
 // Removes right hand invinsibility
-right_hand.is_invinsible = false;
+right_hand.is_attacking  = false;
 
 // Returns to right hand original sprite
 right_hand.state = state_right_hand.idle;

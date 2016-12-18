@@ -64,6 +64,7 @@ image_speed      = 0.2;
           <argument>
             <kind>1</kind>
             <string>/// Manage state machine
+event_inherited();
 
 switch (state) {
 
