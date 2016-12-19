@@ -45,6 +45,8 @@ draw_text(x_base + 50, y_base + 200, "Christopher Francisco");
 draw_text(x_base + 50, y_base + 250, "Ricardo Noriega");
 
 draw_text(x_base - 100, y_base + 300, "Pegale a las manos de la TULIVIEJA para poder saltar en ellas y pegarle en la CARA :)");
+
+draw_text(x_base - 150, y_base + 350, "Disclaimer: La musica de fondo proviene del videojuego Earthbound, llamada Porky Means Business");
 </string>
           </argument>
         </arguments>
