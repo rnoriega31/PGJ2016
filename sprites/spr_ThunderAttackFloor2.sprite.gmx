@@ -20,11 +20,11 @@
   <width>1024</width>
   <height>80</height>
   <frames>
-    <frame index="0">images\spr_ThunderAttackFloor_0.png</frame>
-    <frame index="1">images\spr_ThunderAttackFloor_1.png</frame>
-    <frame index="2">images\spr_ThunderAttackFloor_2.png</frame>
-    <frame index="3">images\spr_ThunderAttackFloor_3.png</frame>
-    <frame index="4">images\spr_ThunderAttackFloor_4.png</frame>
-    <frame index="5">images\spr_ThunderAttackFloor_5.png</frame>
+    <frame index="0">images\spr_ThunderAttackFloor2_0.png</frame>
+    <frame index="1">images\spr_ThunderAttackFloor2_1.png</frame>
+    <frame index="2">images\spr_ThunderAttackFloor2_2.png</frame>
+    <frame index="3">images\spr_ThunderAttackFloor2_3.png</frame>
+    <frame index="4">images\spr_ThunderAttackFloor2_4.png</frame>
+    <frame index="5">images\spr_ThunderAttackFloor2_5.png</frame>
   </frames>
 </sprite>
