@@ -12,7 +12,11 @@
   <showcolour>-1</showcolour>
   <code>var tuli = instance_create(0, 0, obj_TuliVieja);
 
-tuli.depth = 1000000;</code>
+tuli.depth = 1000000;
+
+// BGM
+
+audio_play_sound(snd_BackgroundMusic, 10, true);</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>

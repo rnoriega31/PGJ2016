@@ -187,6 +187,11 @@ switch (state) {
         
     case state_boss_manager.ready:    
     
+        // FOrgivbepls
+        if (obj_CholoSamurai.p_health == 0) {
+            break;
+        }
+    
         /// Choose an attack randomly
         var index = random_range(0,2); // Range inclusion is [n,m)
         

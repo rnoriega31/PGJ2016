@@ -83,6 +83,10 @@ event_inherited();
 event_inherited();
 
 draw_text(x + 64, y + 64, string(e_health) + "/" + string(e_max_health));
+
+if (e_health == 0 || obj_CholoSamurai.p_health == 0) {
+    draw_text(x + 30, y, "Press R to reset");
+}
 </string>
           </argument>
         </arguments>
