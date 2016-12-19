@@ -339,7 +339,7 @@ if (p_health &lt;= 0) {
 
 // MOR FORGIBE
 key_reset = keyboard_check_pressed(ord('R'));
-if (p_health == 0 &amp;&amp; key_reset) {
+if ((p_health == 0 || obj_Face.e_health == 0 ) &amp;&amp; key_reset) {
     obj_Face.e_health = obj_Face.e_max_health;
     p_health = p_max_health;
 }

@@ -187,10 +187,18 @@ switch (state) {
         
     case state_boss_manager.ready:    
     
-        // FOrgivbepls
-        if (obj_CholoSamurai.p_health == 0) {
-            break;
-        }
+        // FOrgivbepls -  wont attack if player is ded or boss is ded too
+        if (obj_CholoSamurai.p_health == 0 || obj_Face.e_health == 0) {
+            // mor forgibes
+            
+            // pls ;-;
+            if (instance_exists(obj_ThunderAttack)) {
+                obj_ThunderAttack.thunder_counter = obj_ThunderAttack.max_thunder_amount;
+                obj_ThunderAttack.state = state_thunder_attack.finished;
+            }
+            
+        } else { 
+        // Not even indentation, forgibe
     
         /// Choose an attack randomly
         var index = random_range(0,2); // Range inclusion is [n,m)
@@ -229,6 +237,8 @@ switch (state) {
         // Callback for next attack
         alarm[0] = delay_state_ready;        
         
+        // it rly urts
+        }
         break;
         
     default:
@@ -305,6 +315,11 @@ var callback_delay = delay_right_hand_state_idle; // TODO: this LOL
 with(obj_RightHand) {
     if (e_health == 0) {
     
+        if (instance_exists(obj_ThunderAttack)) {
+            obj_ThunderAttack.thunder_counter = obj_ThunderAttack.max_thunder_amount;
+            obj_ThunderAttack.state = state_thunder_attack.finished;
+        }
+        
         if(! instance_exists(obj_PlatformRightHand)) {
             // Change state to stunned
             state = state_right_hand.stunned;

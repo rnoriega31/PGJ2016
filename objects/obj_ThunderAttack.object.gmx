@@ -40,7 +40,18 @@ enum state_thunder_attack {
 state = state_thunder_attack.init;
 
 thunder_counter    = 0
-max_thunder_amount = 1
+
+var first_die = round(random_range(1, 4))
+var amount;
+
+// PLS FORGIBE
+if (first_die &gt; 1) {
+    amount = 1;
+} else {
+    amount = round(random_range(2, 4));
+}
+
+max_thunder_amount = amount;
 
 delay_state_homing_start        = 20 + 30;
 delay_state_homing_stop         = 80 + 30;
@@ -50,7 +61,7 @@ delay_state_finished            = 130 + 30;
 
 // Set right hand to thunder_attack_opening
 right_hand                  = instance_find(obj_RightHand, 0);
-right_hand.is_attacking     = true; // TODO: maybe move to hand's step??
+right_hand.is_attacking     = false; // so it can be hit while attacking
 right_hand.state            = state_right_hand.attack_thunder_opening;
 </string>
           </argument>
@@ -76,8 +87,7 @@ right_hand.state            = state_right_hand.attack_thunder_opening;
             <kind>1</kind>
             <string>///Returns everything to pre-attack state
 
-// Removes right hand invinsibility
-right_hand.is_attacking  = false;
+right_hand.is_attacking  = true; // prevent being attacked when idle
 
 // Returns to right hand original sprite
 right_hand.state = state_right_hand.idle;
@@ -128,7 +138,13 @@ state = state_thunder_attack.finished;
           <argument>
             <kind>1</kind>
             <string>///Changes state to hitbox spreading
+
+// PLS FORGIBE
+if (state != state_thunder_attack.finished) {
+
 state = state_thunder_attack.hitbox_spreading;
+
+}
 </string>
           </argument>
         </arguments>
@@ -153,7 +169,12 @@ state = state_thunder_attack.hitbox_spreading;
             <kind>1</kind>
             <string>///Changes state to hitbox_active
 
+// PLS FORGIBE
+if (state != state_thunder_attack.finished) {
+
 state = state_thunder_attack.hitbox_active;
+
+}
 </string>
           </argument>
         </arguments>
@@ -177,7 +198,13 @@ state = state_thunder_attack.hitbox_active;
           <argument>
             <kind>1</kind>
             <string>/// Change state to homing_stop
+
+// PLS FORGIBE
+if (state != state_thunder_attack.finished) {
+
 state = state_thunder_attack.homing_stop;
+
+}
 </string>
           </argument>
         </arguments>
@@ -202,7 +229,12 @@ state = state_thunder_attack.homing_stop;
             <kind>1</kind>
             <string>///Change state to homing_start
 
+// PLS FORGIBE
+if (state != state_thunder_attack.finished) {
+
 state = state_thunder_attack.homing_start;
+
+}
 </string>
           </argument>
         </arguments>

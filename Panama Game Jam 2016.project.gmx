@@ -68,8 +68,10 @@
     <object>objects\obj_PlatformRightHand</object>
     <object>objects\obj_Face</object>
     <object>objects\obj_TuliVieja</object>
+    <object>objects\obj_StartMenu</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_start_room</room>
     <room>rooms\rm_game</room>
   </rooms>
   <help>
