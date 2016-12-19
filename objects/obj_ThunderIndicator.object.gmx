@@ -36,6 +36,8 @@ enum state_thunder_indicator {
 state = state_thunder_indicator.idle;
 
 depth = -100;
+
+image_speed = 0.2;
 </string>
           </argument>
         </arguments>
@@ -99,7 +101,7 @@ switch (state) {
             <kind>1</kind>
             <string>/// Perform general step property update
 
-y = obj_Floor.y - (obj_Floor.sprite_height / 2) + (sprite_height / 2);
+//y = obj_Floor.y - (obj_Floor.sprite_height / 2) + (sprite_height / 2);
 </string>
           </argument>
         </arguments>

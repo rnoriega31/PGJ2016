@@ -248,7 +248,7 @@ switch (state) {
             // Creates Indicator
             var thunder_indicator = instance_create(
                 obj_CholoSamurai.x, 
-                (obj_Floor.y - obj_Floor.sprite_height / 2), 
+                0, 
                 obj_ThunderIndicator
             );
             
