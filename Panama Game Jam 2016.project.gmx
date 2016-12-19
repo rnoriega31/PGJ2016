@@ -42,6 +42,7 @@
   </sprites>
   <backgrounds name="background">
     <background>background\bg_temp</background>
+    <background>background\bg_arena_background</background>
   </backgrounds>
   <paths name="paths"/>
   <objects name="objects">
